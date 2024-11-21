@@ -1,0 +1,132 @@
+---
+title: "Assignment #1"
+author: "Your Name"
+date: today
+format: 
+  pdf:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 1
+    number-sections: true
+    colorlinks: true
+    fontsize: 12pt
+    link-citations: true
+    linkcolor: "purple"
+    urlcolor: "purple"
+    code-block-bg: "#fff2f9"
+    code-block-border-left: "purple"
+    tbl-colwidths: [50,50]
+    fig-pos: "H"
+    fig-align: "center"
+    tbl-align: "center"
+    highlight-style: atom-one
+    indent: false
+    # code-overflow: wrap
+    # linestretch: 2
+    keep-tex: true
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+execute:
+  warning: false
+  message: false
+  fig-width: 4
+  fig-height: 5
+editor: visual
+bibliography: references.bib
+---
+
+\newpage
+
+# Housekeeping
+
+## Packages
+
+```{r}
+## Load packages
+library(broom)
+library(car)
+library(conflicted)
+library(glue)
+library(kableExtra)
+library(knitr)
+library(skimr)
+library(tidyverse)
+
+## Prefer over all other packages
+conflict_prefer("filter", "dplyr")
+```
+
+## Functions
+
+```{r}
+## Create function that doubles the input digit
+double_it <- function(number){
+  double = number * 2
+  return(double)
+}
+```
+
+## Data
+
+```{r}
+## Load raw data
+df <- read_csv("data/favorability_polls.csv")
+```
+
+# Exploratory data analysis
+
+A cool thing about Quarto is that you can manage your bibliography and references; for instance:
+
+According to @wickham2023r, we conduct exploratory data analysis, among other things, to generate questions about the data or refine the questions we already have.
+
+To do so, you just need to copy the BibTeX reference from Google Scholar and paste it into the *references.bib* file located in the working directory.
+
+You can also include code and showcase code output:
+
+```{r}
+#| fig-width: 11
+df |>
+  count(politician) |>
+  arrange(desc(n)) |>
+  filter(n > 20) |>
+  mutate(
+    politician = gsub(".* ", "", politician),
+    politician = factor(politician, levels = politician)
+  ) |>
+  ggplot(aes(x = politician, y = n))  +
+  geom_bar(stat = "identity", fill = "gold") +
+  theme_light() + 
+  theme(axis.text.x = element_text(angle = -45, hjust = 0)) +
+  labs(
+    title = "Favorability polls: Number of polls in which each politician has been included",
+    subtitle = "Politicians with more than 20 polls",
+    x = "",
+    y = "",
+    caption = "Data source: Latest Polls - FiveThirtyEight"
+  )
+```
+
+Moreover, you can insert {{< latex >}} math:
+
+$$
+\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i
+$$
+
+You can also insert inline {{< latex >}} math: $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$
+
+::: callout-important
+## Install extension
+
+If the iconic {{< latex >}} string is not rendering in your computer, you must run the following command in the RStudio Terminal:\
+
+*quarto add quarto-ext/fancy-text*
+:::
+
+This Quarto document has very extensive YAML metadata. Feel free to change parameters and customize the PDF outcome the way you find prettier.
+
+Remember, this model Quarto document is included in a [open-access GitHub repository](https://github.com/ealvaradomena/class_repo). Please read the blog post I wrote about it.
+
+# References
