@@ -44,7 +44,7 @@ bibliography: references.bib
 ::: callout-tip
 ## Clone the model Quarto document
 
-You can clone the model Quarto document from [GitHub](https://github.com/ealvaradomena/class_repo). The repository is open-access. Please read my blog post about it.
+You can clone the model Quarto document from [GitHub](https://github.com/ealvaradomena/class_repo). The repository is open-access. Please read my [blog post](https://unofficialprimer.netlify.app/posts/professional_documents_with_quarto/) about it.
 :::
 
 \newpage
