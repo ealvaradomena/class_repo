@@ -250,7 +250,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, colback={codebgcolor}, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, colback={codebgcolor}, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Contents}
 {
@@ -258,13 +258,24 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\hfill\break
+\hfill\break
+
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, opacityback=0, arc=.35mm, leftrule=.75mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Clone the model Quarto document}, toptitle=1mm, titlerule=0mm, bottomrule=.15mm, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, coltitle=black]
+
+You can clone the model Quarto document from
+\href{https://github.com/ealvaradomena/class_repo}{GitHub}. The
+repository is open-access. Please read my blog post about it.
+
+\end{tcolorbox}
+
 \newpage
 
 \hypertarget{housekeeping}{%
 \section{Housekeeping}\label{housekeeping}}
 
-I typically create a \emph{Housekeeping} section where I install
-packages, create functions, and load data.
+I typically create a \protect\hyperlink{housekeeping}{Housekeeping}
+section where I install packages, create functions, and load data.
 
 \hypertarget{packages}{%
 \subsection{Packages}\label{packages}}
@@ -276,6 +287,7 @@ packages, create functions, and load data.
 \FunctionTok{library}\NormalTok{(conflicted)}
 \FunctionTok{library}\NormalTok{(kableExtra)}
 \FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(rmarkdown)}
 \FunctionTok{library}\NormalTok{(tidyverse)}
 
 \DocumentationTok{\#\# Prefer over all other packages}
@@ -306,8 +318,8 @@ packages, create functions, and load data.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exploratory-data-analysis}{%
-\section{Exploratory data analysis}\label{exploratory-data-analysis}}
+\hypertarget{quartos-cool-features}{%
+\section{Quarto's cool features}\label{quartos-cool-features}}
 
 Notice that you can create headers in Quarto documents. Quarto will use
 these headers to print the table of contents.
@@ -320,12 +332,16 @@ and references; for instance:
 data analysis, among other things, to generate new questions about the
 data or refine the questions we already have.}
 
-To do so, you just need to copy the BibTeX reference from Google Scholar
-and paste it into the \emph{references.bib} file located in the working
-directory. Check the citation syntax,
-\href{https://quarto.org/docs/authoring/citations.html}{here}.
+Once a citation is included, Quarto will automatically create a
+\protect\hyperlink{references}{References} section at the end of the
+document (you must provide the header, though). Check the citation
+syntax, \href{https://quarto.org/docs/authoring/citations.html}{here}.
 
-Quarto allows you to include code and print code output:
+To add references, you just need to copy the BibTeX reference from
+Google Scholar and paste it into the \emph{references.bib} file located
+in the working directory.
+
+Quarto allows you to print code and code output:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -363,7 +379,7 @@ Quarto allows you to include code and print code output:
 You can set the figures' width and depth as general patterns in the YAML
 metadata. Likewise, you can set specific parameters by typing, for
 example, \texttt{\#\textbar{}\ fig-width:\ 11} at the first line of the
-chunk in question.
+chunk that plots the data.
 
 Moreover, you can insert {\LaTeX} math:
 
@@ -371,10 +387,10 @@ Moreover, you can insert {\LaTeX} math:
 \bar{y} = \frac{1}{n}\sum_{i=1}^n y_i
 \]
 
-You can also insert inline {\LaTeX} math:
+And you can also insert inline {\LaTeX} math:
 \(\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i\)
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, bottomtitle=1mm, coltitle=black, toprule=.15mm, bottomrule=.15mm, toptitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, left=2mm, opacitybacktitle=0.6, titlerule=0mm, leftrule=.75mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Install extension}]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, opacityback=0, arc=.35mm, leftrule=.75mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Install extension}, toptitle=1mm, titlerule=0mm, bottomrule=.15mm, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, coltitle=black]
 
 If the iconic {\LaTeX} string is not rendering in your computer, you
 must run the following command in the RStudio Terminal:\\
@@ -383,13 +399,8 @@ must run the following command in the RStudio Terminal:\\
 
 \end{tcolorbox}
 
-Remember, you can download this model Quarto document from
-\href{https://github.com/ealvaradomena/class_repo}{GitHub}. Please read
-my blog post about it.
-
-As you will see, the model Quarto document has very extensive YAML
-metadata. Feel free to change parameters and customize the PDF file the
-way you find prettier.
+The model Quarto document has very extensive YAML metadata. Feel free to
+change parameters and customize the PDF file the way you find prettier.
 
 By the way, here is some code to print neat regression tables using the
 \texttt{kableExtra} and \texttt{broom} packages:
@@ -452,8 +463,36 @@ cyl & -2.26 & 0.58 & -3.93 & 0.0005 \\
 hp & -0.02 & 0.02 & -1.27 & 0.2125 \\
 \end{longtable}
 
-Hit the \emph{Render} button to turn the Quarto document into a PDF
-file. The new file will be created in the working directory.
+\hypertarget{rendering-quarto-document-to-pdf-file}{%
+\section{Rendering Quarto document to PDF
+file}\label{rendering-quarto-document-to-pdf-file}}
+
+Three steps are absolutely necessary:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Install all the packages loaded in
+  \protect\hyperlink{packages}{Packages} (RStudio will warn you about
+  it).
+\item
+  Run the following command in the RStudio Terminal:\\
+  \emph{quarto add quarto-ext/fancy-text}
+\item
+  Run the following command in the RStudio Terminal:\\
+  \emph{quarto install tinytex}
+\end{enumerate}
+
+Remember that the RStudio Terminal (where you install extensions) is
+different from the RStudio Console (where you run code).
+
+Once steps 1, 2, and 3 are done, you just hit the \emph{Render} button
+to turn the Quarto document into a PDF file. The new file will be
+created in the working directory.
+
+Keep in mind that errors in the code will prevent the Quarto document
+from rendering. Your code must be working prior to hitting the
+\emph{Render} button.
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
@@ -463,7 +502,7 @@ file. The new file will be created in the working directory.
 \begin{CSLReferences}{1}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-wickham2023r}{}}%
 Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.
-\emph{R for Data Science}. " O'Reilly Media, Inc.".
+\emph{R for Data Science}. O'Reilly Media, Inc.
 
 \end{CSLReferences}
 

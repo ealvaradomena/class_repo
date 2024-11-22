@@ -38,11 +38,20 @@ editor: visual
 bibliography: references.bib
 ---
 
+\
+\
+
+::: callout-tip
+## Clone the model Quarto document
+
+You can clone the model Quarto document from [GitHub](https://github.com/ealvaradomena/class_repo). The repository is open-access. Please read my blog post about it.
+:::
+
 \newpage
 
 # Housekeeping
 
-I typically create a *Housekeeping* section where I install packages, create functions, and load data.
+I typically create a [Housekeeping] section where I install packages, create functions, and load data.
 
 ## Packages
 
@@ -52,6 +61,7 @@ library(broom)
 library(conflicted)
 library(kableExtra)
 library(knitr)
+library(rmarkdown)
 library(tidyverse)
 
 ## Prefer over all other packages
@@ -75,7 +85,7 @@ double_it <- function(number){
 df <- read_csv("data/favorability_polls.csv")
 ```
 
-# Exploratory data analysis
+# Quarto's cool features
 
 Notice that you can create headers in Quarto documents. Quarto will use these headers to print the table of contents.
 
@@ -83,9 +93,11 @@ Another cool thing about Quarto is that you can manage your bibliography and ref
 
 *According to @wickham2023r, we conduct exploratory data analysis, among other things, to generate new questions about the data or refine the questions we already have.*
 
-To do so, you just need to copy the BibTeX reference from Google Scholar and paste it into the *references.bib* file located in the working directory. Check the citation syntax, [here](https://quarto.org/docs/authoring/citations.html).
+Once a citation is included, Quarto will automatically create a [References] section at the end of the document (you must provide the header, though). Check the citation syntax, [here](https://quarto.org/docs/authoring/citations.html).
 
-Quarto allows you to include code and print code output:
+To add references, you just need to copy the BibTeX reference from Google Scholar and paste it into the *references.bib* file located in the working directory.
+
+Quarto allows you to print code and code output:
 
 ```{r}
 #| fig-width: 11
@@ -111,7 +123,7 @@ df |>
   )
 ```
 
-You can set the figures' width and depth as general patterns in the YAML metadata. Likewise, you can set specific parameters by typing, for example, `#| fig-width: 11` at the first line of the chunk in question.
+You can set the figures' width and depth as general patterns in the YAML metadata. Likewise, you can set specific parameters by typing, for example, `#| fig-width: 11` at the first line of the chunk that plots the data.
 
 Moreover, you can insert {{< latex >}} math:
 
@@ -119,7 +131,7 @@ $$
 \bar{y} = \frac{1}{n}\sum_{i=1}^n y_i
 $$
 
-You can also insert inline {{< latex >}} math: $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$
+And you can also insert inline {{< latex >}} math: $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$
 
 ::: callout-important
 ## Install extension
@@ -129,9 +141,7 @@ If the iconic {{< latex >}} string is not rendering in your computer, you must r
 *quarto add quarto-ext/fancy-text*
 :::
 
-Remember, you can download this model Quarto document from [GitHub](https://github.com/ealvaradomena/class_repo). Please read my blog post about it.
-
-As you will see, the model Quarto document has very extensive YAML metadata. Feel free to change parameters and customize the PDF file the way you find prettier.
+The model Quarto document has very extensive YAML metadata. Feel free to change parameters and customize the PDF file the way you find prettier.
 
 By the way, here is some code to print neat regression tables using the `kableExtra` and `broom` packages:
 
@@ -149,6 +159,22 @@ kableExtra::kable(
 )
 ```
 
-Hit the *Render* button to turn the Quarto document into a PDF file. The new file will be created in the working directory.
+# Rendering Quarto document to PDF file
+
+Three steps are absolutely necessary:
+
+1.  Install all the packages loaded in [Packages] (RStudio will warn you about it).
+
+2.  Run the following command in the RStudio Terminal: \
+    *quarto add quarto-ext/fancy-text*
+
+3.  Run the following command in the RStudio Terminal: \
+    *quarto install tinytex*
+
+Remember that the RStudio Terminal (where you install extensions) is different from the RStudio Console (where you run code).
+
+Once steps 1, 2, and 3 are done, you just hit the *Render* button to turn the Quarto document into a PDF file. The new file will be created in the working directory.
+
+Keep in mind that errors in the code will prevent the Quarto document from rendering. Your code must be working prior to hitting the *Render* button.
 
 # References
