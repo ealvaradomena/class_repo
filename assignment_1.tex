@@ -246,11 +246,11 @@
 
 \title{Assignment \#1}
 \author{Your Name}
-\date{2024-11-21}
+\date{2024-11-22}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, sharp corners, colback={codebgcolor}, borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, colback={codebgcolor}, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Contents}
 {
@@ -263,6 +263,9 @@
 \hypertarget{housekeeping}{%
 \section{Housekeeping}\label{housekeeping}}
 
+I typically create a \emph{Housekeeping} section where I install
+packages, create functions, and load data.
+
 \hypertarget{packages}{%
 \subsection{Packages}\label{packages}}
 
@@ -270,12 +273,9 @@
 \begin{Highlighting}[]
 \DocumentationTok{\#\# Load packages}
 \FunctionTok{library}\NormalTok{(broom)}
-\FunctionTok{library}\NormalTok{(car)}
 \FunctionTok{library}\NormalTok{(conflicted)}
-\FunctionTok{library}\NormalTok{(glue)}
 \FunctionTok{library}\NormalTok{(kableExtra)}
 \FunctionTok{library}\NormalTok{(knitr)}
-\FunctionTok{library}\NormalTok{(skimr)}
 \FunctionTok{library}\NormalTok{(tidyverse)}
 
 \DocumentationTok{\#\# Prefer over all other packages}
@@ -301,7 +301,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Load raw data}
+\DocumentationTok{\#\# Load data}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/favorability\_polls.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -309,22 +309,27 @@
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory data analysis}\label{exploratory-data-analysis}}
 
-A cool thing about Quarto is that you can manage your bibliography and
-references; for instance:
+Notice that you can create headers in Quarto documents. Quarto will use
+these headers to print the table of contents.
 
-According to Wickham, Çetinkaya-Rundel, and Grolemund
+Another cool thing about Quarto is that you can manage your bibliography
+and references; for instance:
+
+\emph{According to Wickham, Çetinkaya-Rundel, and Grolemund
 (\protect\hyperlink{ref-wickham2023r}{2023}), we conduct exploratory
-data analysis, among other things, to generate questions about the data
-or refine the questions we already have.
+data analysis, among other things, to generate new questions about the
+data or refine the questions we already have.}
 
 To do so, you just need to copy the BibTeX reference from Google Scholar
 and paste it into the \emph{references.bib} file located in the working
-directory.
+directory. Check the citation syntax,
+\href{https://quarto.org/docs/authoring/citations.html}{here}.
 
-You can also include code and showcase code output:
+Quarto allows you to include code and print code output:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\DocumentationTok{\#\# Plot}
 \NormalTok{df }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{count}\NormalTok{(politician) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n)) }\SpecialCharTok{|\textgreater{}}
@@ -338,7 +343,7 @@ You can also include code and showcase code output:
   \FunctionTok{theme\_light}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \SpecialCharTok{{-}}\DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Favorability polls: Number of polls in which each politician has been included"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Favorability polls: A count of the polls in which each politician has been included"}\NormalTok{,}
     \AttributeTok{subtitle =} \StringTok{"Politicians with more than 20 polls"}\NormalTok{,}
     \AttributeTok{x =} \StringTok{""}\NormalTok{,}
     \AttributeTok{y =} \StringTok{""}\NormalTok{,}
@@ -355,6 +360,11 @@ You can also include code and showcase code output:
 
 \end{figure}
 
+You can set the figures' width and depth as general patterns in the YAML
+metadata. Likewise, you can set specific parameters by typing, for
+example, \texttt{\#\textbar{}\ fig-width:\ 11} at the first line of the
+chunk in question.
+
 Moreover, you can insert {\LaTeX} math:
 
 \[
@@ -364,7 +374,7 @@ Moreover, you can insert {\LaTeX} math:
 You can also insert inline {\LaTeX} math:
 \(\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i\)
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, toprule=.15mm, rightrule=.15mm, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, left=2mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Install extension}, toptitle=1mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, bottomtitle=1mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, breakable, bottomtitle=1mm, coltitle=black, toprule=.15mm, bottomrule=.15mm, toptitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, left=2mm, opacitybacktitle=0.6, titlerule=0mm, leftrule=.75mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Install extension}]
 
 If the iconic {\LaTeX} string is not rendering in your computer, you
 must run the following command in the RStudio Terminal:\\
@@ -373,13 +383,77 @@ must run the following command in the RStudio Terminal:\\
 
 \end{tcolorbox}
 
-This Quarto document has very extensive YAML metadata. Feel free to
-change parameters and customize the PDF outcome the way you find
-prettier.
+Remember, you can download this model Quarto document from
+\href{https://github.com/ealvaradomena/class_repo}{GitHub}. Please read
+my blog post about it.
 
-Remember, this model Quarto document is included in a
-\href{https://github.com/ealvaradomena/class_repo}{open-access GitHub
-repository}. Please read the blog post I wrote about it.
+As you will see, the model Quarto document has very extensive YAML
+metadata. Feel free to change parameters and customize the PDF file the
+way you find prettier.
+
+By the way, here is some code to print neat regression tables using the
+\texttt{kableExtra} and \texttt{broom} packages:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Fit the model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl }\SpecialCharTok{+}\NormalTok{ hp, }\AttributeTok{data =}\NormalTok{ mtcars)}
+
+\DocumentationTok{\#\# Print regression table}
+\NormalTok{kableExtra}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \AttributeTok{x =}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{tidy}\NormalTok{(model), }
+  \AttributeTok{caption =} \StringTok{"Regression output"}\NormalTok{,}
+  \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Term"}\NormalTok{, }\StringTok{"Estimate"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"t{-}statistic"}\NormalTok{, }\StringTok{"p{-}value"}\NormalTok{),}
+  \AttributeTok{digits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{format =} \StringTok{"pipe"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\caption{Regression output}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+t-statistic
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p-value
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+t-statistic
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p-value
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+(Intercept) & 36.91 & 2.19 & 16.85 & 0.0000 \\
+cyl & -2.26 & 0.58 & -3.93 & 0.0005 \\
+hp & -0.02 & 0.02 & -1.27 & 0.2125 \\
+\end{longtable}
+
+Hit the \emph{Render} button to turn the Quarto document into a PDF
+file. The new file will be created in the working directory.
 
 \hypertarget{references}{%
 \section*{References}\label{references}}

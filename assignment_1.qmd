@@ -42,17 +42,16 @@ bibliography: references.bib
 
 # Housekeeping
 
+I typically create a *Housekeeping* section where I install packages, create functions, and load data.
+
 ## Packages
 
 ```{r}
 ## Load packages
 library(broom)
-library(car)
 library(conflicted)
-library(glue)
 library(kableExtra)
 library(knitr)
-library(skimr)
 library(tidyverse)
 
 ## Prefer over all other packages
@@ -72,22 +71,25 @@ double_it <- function(number){
 ## Data
 
 ```{r}
-## Load raw data
+## Load data
 df <- read_csv("data/favorability_polls.csv")
 ```
 
 # Exploratory data analysis
 
-A cool thing about Quarto is that you can manage your bibliography and references; for instance:
+Notice that you can create headers in Quarto documents. Quarto will use these headers to print the table of contents.
 
-According to @wickham2023r, we conduct exploratory data analysis, among other things, to generate questions about the data or refine the questions we already have.
+Another cool thing about Quarto is that you can manage your bibliography and references; for instance:
 
-To do so, you just need to copy the BibTeX reference from Google Scholar and paste it into the *references.bib* file located in the working directory.
+*According to @wickham2023r, we conduct exploratory data analysis, among other things, to generate new questions about the data or refine the questions we already have.*
 
-You can also include code and showcase code output:
+To do so, you just need to copy the BibTeX reference from Google Scholar and paste it into the *references.bib* file located in the working directory. Check the citation syntax, [here](https://quarto.org/docs/authoring/citations.html).
+
+Quarto allows you to include code and print code output:
 
 ```{r}
 #| fig-width: 11
+## Plot
 df |>
   count(politician) |>
   arrange(desc(n)) |>
@@ -101,13 +103,15 @@ df |>
   theme_light() + 
   theme(axis.text.x = element_text(angle = -45, hjust = 0)) +
   labs(
-    title = "Favorability polls: Number of polls in which each politician has been included",
+    title = "Favorability polls: A count of the polls in which each politician has been included",
     subtitle = "Politicians with more than 20 polls",
     x = "",
     y = "",
     caption = "Data source: Latest Polls - FiveThirtyEight"
   )
 ```
+
+You can set the figures' width and depth as general patterns in the YAML metadata. Likewise, you can set specific parameters by typing, for example, `#| fig-width: 11` at the first line of the chunk in question.
 
 Moreover, you can insert {{< latex >}} math:
 
@@ -125,8 +129,26 @@ If the iconic {{< latex >}} string is not rendering in your computer, you must r
 *quarto add quarto-ext/fancy-text*
 :::
 
-This Quarto document has very extensive YAML metadata. Feel free to change parameters and customize the PDF outcome the way you find prettier.
+Remember, you can download this model Quarto document from [GitHub](https://github.com/ealvaradomena/class_repo). Please read my blog post about it.
 
-Remember, this model Quarto document is included in a [open-access GitHub repository](https://github.com/ealvaradomena/class_repo). Please read the blog post I wrote about it.
+As you will see, the model Quarto document has very extensive YAML metadata. Feel free to change parameters and customize the PDF file the way you find prettier.
+
+By the way, here is some code to print neat regression tables using the `kableExtra` and `broom` packages:
+
+```{r}
+## Fit the model
+model <- lm(mpg ~ cyl + hp, data = mtcars)
+
+## Print regression table
+kableExtra::kable(
+  x = broom::tidy(model), 
+  caption = "Regression output",
+  col.names = c("Term", "Estimate", "SE", "t-statistic", "p-value"),
+  digits = c(0, 2, 2, 2, 4),
+  format = "pipe"
+)
+```
+
+Hit the *Render* button to turn the Quarto document into a PDF file. The new file will be created in the working directory.
 
 # References
